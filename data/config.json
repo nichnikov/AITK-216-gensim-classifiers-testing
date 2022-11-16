@@ -1,0 +1,12 @@
+{
+  "restart_through_seconds": 86400,
+  "score": 0.98,
+  "service_host": "0.0.0.0",
+  "service_port": 4002,
+  "VOCABULARY_SIZE": 55000,
+  "SHARD_SIZE": 50000,
+  "etalons_add_url": "http://0.0.0.0:4002/api/etalons/add",
+  "answer_add_url": "http://0.0.0.0:4002/api/answers/add",
+  "etalons_delete_url": "http://0.0.0.0:4002/api/etalons/delete",
+  "answer_delete_url": "http://0.0.0.0:4002/api/answers/delete"
+  }
