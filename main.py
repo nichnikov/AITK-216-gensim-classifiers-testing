@@ -17,8 +17,9 @@ from datetime import datetime
 sys_file_names = [(1, "sys1_testing_set.csv"), (2, "sys2_testing_set.csv"), (8, "sys3_testing_set.csv")]
 now = datetime.now()
 date_time = now.strftime("%Y%m%d_%H%M")
-score = 0.80
+score = 0.9
 parameters = {"timestamp": date_time, "score": score}
+os.mkdir(os.path.join(root, "data", "results", date_time))
 
 for sys_id, file_name in sys_file_names:
     parameters["SysID"] = sys_id
@@ -48,15 +49,22 @@ for sys_id, file_name in sys_file_names:
 
     file_name = "".join([date_time, "_SysId", str(sys_id), "_test_results_Jaccard.csv"])
     parameters["result_file_name"] = file_name
-    results_df.to_csv(os.path.join(root, "data", "results", file_name), sep="\t", index=False)
+    results_df.to_csv(os.path.join(root, "data", "results", date_time, file_name), sep="\t", index=False)
 
-    results_df.drop("etalon_text", axis=1, inplace=True)
-    results_df.drop_duplicates(inplace=True)
+    id_score_max = results_df.groupby("test_id", as_index=False)["score"].max()
+
+    result_dfs = []
+    results_df_cut = results_df.drop(["etalon_id", "etalon_text"], axis=1)
+    for i, s in zip(id_score_max["test_id"], id_score_max["score"]):
+        temp_df = results_df_cut[(results_df_cut["test_id"] == i) & (results_df_cut["score"] == s)]
+        result_dfs.append(temp_df)
+
+    results_df_cut = pd.concat(result_dfs, axis=0)
+    results_df_cut.drop_duplicates(inplace=True)
     file_name = "".join([date_time, "_SysId", str(sys_id), "_test_results_Jaccard_cut.csv"])
     parameters["result_file_name_cut"] = file_name
-    results_df.to_csv(os.path.join(root, "data", "results", file_name), sep="\t", index=False)
+
+    results_df_cut.to_csv(os.path.join(root, "data", "results", date_time, file_name), sep="\t", index=False)
     parameters_file_name = "".join([date_time, "_SysID", str(sys_id), "_parameters.json"])
-    with open(os.path.join(root, "data", "results", parameters_file_name), "w") as j_f:
+    with open(os.path.join(root, "data", "results", date_time, parameters_file_name), "w") as j_f:
         json.dump(parameters, j_f)
-
-
