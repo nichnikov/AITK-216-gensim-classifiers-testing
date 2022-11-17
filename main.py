@@ -18,9 +18,7 @@ sys_file_names = [(1, "sys1_testing_set.csv"), (2, "sys2_testing_set.csv"), (8, 
 now = datetime.now()
 date_time = now.strftime("%Y%m%d_%H%M")
 score = 0.80
-parameters = {}
-parameters["timestamp"] = date_time
-parameters["score"] = score
+parameters = {"timestamp": date_time, "score": score}
 
 for sys_id, file_name in sys_file_names:
     parameters["SysID"] = sys_id
