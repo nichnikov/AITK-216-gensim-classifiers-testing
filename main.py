@@ -17,7 +17,7 @@ from datetime import datetime
 sys_file_names = [(1, "sys1_testing_set.csv"), (2, "sys2_testing_set.csv"), (8, "sys3_testing_set.csv")]
 now = datetime.now()
 date_time = now.strftime("%Y%m%d_%H%M")
-score = 0.9
+score = 0.6
 parameters = {"timestamp": date_time, "score": score}
 os.mkdir(os.path.join(root, "data", "results", date_time))
 

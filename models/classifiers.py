@@ -54,7 +54,7 @@ class FastAnswerClassifier:
         self.matrix_list.add(ids_vectors)
         etalons = [Query(et.templateId, et.etalonText, et.etalonId,
                          et.SysID, et.moduleId, et.pubsList) for et in data]
-        self.text_storage.add_etalons(etalons, "etalons")
+        self.text_storage.add(etalons, "etalons")
 
     def delete(self, data: []) -> None:
         """"""
