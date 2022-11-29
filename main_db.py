@@ -17,7 +17,7 @@ from datetime import datetime
 
 data_dir_name = "aitk221_testing"
 sys_file_names = [(3, 11, "SysId3_test_queries.csv"), (4, 14, "SysId4_test_queries.csv"),
-                  (14, 62, "SysId14_test_queries.csv"), (15, 21, "SysId15_test_queries.csv")]
+                  (14, 62, "SysId14_test_queries.csv"), (15, 21, "SysId15_test_queries_cut.csv")]
 now = datetime.now()
 date_time = now.strftime("%Y%m%d_%H%M")
 score = 0.9
